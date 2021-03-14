@@ -146,6 +146,8 @@ def main():
                          ('Paris', 'Nasgrow', 'Walker'))
   
     st.sidebar.write('You selected:', model)
+    
+    uploaded_files = st.sidebar.file_uploader("Choose CSV file", accept_multiple_files=False)
 
     if uploaded_files is None:
         uploaded_files = default_file
