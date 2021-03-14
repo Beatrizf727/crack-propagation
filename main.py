@@ -144,19 +144,22 @@ def main():
 
     model = st.sidebar.selectbox('Select Propagation Model',  # Propagation Law
                          ('Paris', 'Nasgrow', 'Walker'))
+  
     st.sidebar.write('You selected:', model)
 
-    uploaded_files = st.sidebar.file_uploader("Choose a CSV file", accept_multiple_files=False)  # Load file
+    if uploaded_files is None:
+        uploaded_files = default_file
+        st.write('Default File Uploaded Successfuly!')
+    else:
+        st.write('Your File was Uploaded Successfuly!')
 
-    if uploaded_files is not None:
-        st.write('File Uploaded Successfuly!')
-        C = CrackPropagator(init_size=init_size, model=model, file=uploaded_files, nr_dots=nr_dots)
-        visualize_data(C.df, C.df.columns[0], C.df.columns[1])
+    C = CrackPropagator(init_size=init_size, model=model, file=uploaded_files, nr_dots=nr_dots)
+    visualize_data(C.df, C.df.columns[0], C.df.columns[1])
 
-        plot(C)
+    plot(C)
 
-        if st.button('Get Crack Final Size'):
-            st.write('Final Crack Lenghts ', C.crack_size)
+    if st.button('Get Crack Final Size'):
+        st.write('Final Crack Lenghts ', C.crack_size)
 
 
 def visualize_data(df, x_axis, y_axis):
