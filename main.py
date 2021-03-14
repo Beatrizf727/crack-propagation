@@ -132,6 +132,7 @@ def plot(C: CrackPropagator):
 def main():
     default_init = 1.
     default_nr_dots = 6
+    default_file = 'sequence.csv'
 
     st.set_option('deprecation.showfileUploaderEncoding', False)
     st.header("Crack Propagator.")
