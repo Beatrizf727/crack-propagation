@@ -265,7 +265,7 @@ def visualize_data(df, x_axis, y_axis):
     ).interactive()
     graph.encoding.x.title = 'Time (s)'
     graph.encoding.y.title = 'Load Factor'
-    graph.encoding.y.scale = alt.Scale(domain=[-1, 6])
+#    graph.encoding.y.scale = alt.Scale(domain=[-1, 6])
     alt.data_transformers.disable_max_rows()
 
     #graph.show()
@@ -280,7 +280,7 @@ def to_matrix(l, n):
 def main():
     default_init = 2.
     default_nr_dots = 6
-    default_file = 'flight_data/acrobacias/sequence.csv'
+    default_file = 'sequence.csv'
     #default_file = 'flight_data/acrobacias/acrobacias_8.csv'
 
     st.set_option('deprecation.showfileUploaderEncoding', False)
