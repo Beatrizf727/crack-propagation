@@ -2,7 +2,7 @@ tqdm==4.60.0
 altair==4.1.0
 numpy==1.19.5
 csaps==1.0.4
-scipy==1.6.3
+scipy==1.5.4
 matplotlib==3.3.4
 streamlit==0.77.0
 pandas==1.2.4
