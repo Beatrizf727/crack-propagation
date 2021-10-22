@@ -311,7 +311,7 @@ def main():
     else:
         st.write('Your File was Uploaded Successfuly!')
 
-    C = CrackPropagator(init_size=init_size, model=model, file=uploaded_files, nr_dots=nr_dots, repetitions=1)
+    C = CrackPropagator(init_size=init_size, model=model, file=uploaded_files, nr_dots=nr_dots, repetitions=100)
     visualize_data(C.df, C.df.columns[0], C.df.columns[1])
 
     plot(C)
