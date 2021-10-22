@@ -21,7 +21,7 @@ C_nasgro = 7.23 * 10 ** (-11)
 n_nasgro = 3.6
 q = 1
 p = 0.5
-delta_Kth = 0
+delta_Kth = 0.879
 alpha = 2.
 s_max_sigma_0 = 0.3
 A_0 = (0.825 - 0.34 * alpha + 0.05 * alpha ** 2) * ((np.cos(np.pi * s_max_sigma_0 / 2.)) ** (1 / alpha))
@@ -47,6 +47,26 @@ C_walker = 1.1824 * 10 ** (-11)
 n_walker = 3.815
 gamma = 0.691
 
+p00 = 0.4306
+p10 = 0.1175
+p01 = 0.1437
+p20 = -0.09335
+p11 = -0.04874
+p02 = 0.03878
+p30 = 0.03478
+p21 = 0.01998
+p12 = 0.01074
+p03 = -0.05319
+p40 = -0.005875
+p31 = -0.005317
+p22 = -0.0001824
+p13 = -0.002181
+p04 = 0.0086
+p50 = 0.0003921
+p41 = 0.0004211
+p32 = 1.646e-05
+p23 = 0.0003424
+p14 = 0.0001549
 
 # -------------- Functions
 
@@ -58,74 +78,11 @@ def Y(a, theta):
     x = a
     y = theta
 
-    p00 = 0.4306
-    p10 = 0.1175
-    p01 = 0.1437
-    p20 = -0.09335
-    p11 = -0.04874
-    p02 = 0.03878
-    p30 = 0.03478
-    p21 = 0.01998
-    p12 = 0.01074
-    p03 = -0.05319
-    p40 = -0.005875
-    p31 = -0.005317
-    p22 = -0.0001824
-    p13 = -0.002181
-    p04 = 0.0086
-    p50 = 0.0003921
-    p41 = 0.0004211
-    p32 = 1.646e-05
-    p23 = 0.0003424
-    p14 = 0.0001549
-    """
-    p00 = 0.3971
-    p10 = 0.208
-    p01 = 0.1693
-    p20 = -0.189
-    p11 = -0.09791
-    p02 = 0.03483
-    p30 = 0.07573
-    p21 = 0.06419
-    p12 = 0.01082
-    p03 = -0.05099
-    p40 = -0.01272
-    p31 = -0.02152
-    p22 = -7.301e-05
-    p13 = -0.002054
-    p04 = 0.008033
-    p50 = 0.0007324
-    p41 = 0.002319
-    p32 = 0.0001516
-    p23 = 5.828e-05
-    p14 = 0.000325
-    """
     return (
             p00 + p10 * x + p01 * y + p20 * x ** 2 + p11 * x * y + p02 * y ** 2 + p30 * x ** 3 + p21 * x ** 2 * y
             + p12 * x * y ** 2 + p03 * y ** 3 + p40 * x ** 4 + p31 * x ** 3 * y + p22 * x ** 2 * y ** 2
             + p13 * x * y ** 3 + p04 * y ** 4 + p50 * x ** 5 + p41 * x ** 4 * y + p32 * x ** 3 * y ** 2
             + p23 * x ** 2 * y ** 3 + p14 * x * y ** 4
-
-        # -0.00059164 * a ** 4 - 0.001497 * a ** 3 * theta + 0.008795 * a ** 3 + 0.0015485 * a ** 2 * theta ** 2 +
-        # 0.006577 * a ** 2 * theta - 0.037024 * a ** 2 + 0.00057737 * a * theta ** 3 + 0.00012074 * a * theta ** 2 -
-        # 0.024812 * a * theta + 0.067255 * a + 0.0090556 * theta ** 4 - 0.058072 * theta ** 3 +
-        # 0.054222 * theta ** 2 + 0.1249 * theta + 0.44288
-
-        # 0.00040045 * a ** 5 + 0.00043022 * a ** 4 * theta - 0.0059998 * a ** 4 + 1.6813e-05 * a ** 3 * theta ** 2
-        # - 0.005432 * a ** 3 * theta + 0.035524 * a ** 3 + 0.00035157 * a ** 2 * theta ** 3 -
-        # 0.00019548 * a ** 2 * theta ** 2 + 0.020426 * a ** 2 * theta - 0.095355 * a ** 2 +
-        # 0.00015814 * a * theta ** 4 - 0.0022393 * a * theta ** 3 + 0.011028 * a * theta ** 2 - 0.049864 * a * theta
-        # + 0.12 * a - 0.00021838 * theta ** 5 + 0.010498 * theta ** 4 - 0.059086 * theta ** 3 + 0.045151 * theta ** 2
-        # + 0.14431 * theta + 0.43993
-
-        # -0.00060419 * r ** 4 - 0.0015288 * r ** 3 * theta + 0.0089816 * r ** 3 + 0.0015814 * r ** 2 * theta ** 2 +
-        # 0.0067165 * r ** 2 * theta - 0.037809 * r ** 2 + 0.00058962 * r * theta ** 3 + 0.0001233 * r * theta ** 2 -
-        # 0.025339 * r * theta + 0.068682 * r + 0.0092477 * theta ** 4 - 0.059304 * theta ** 3
-        # + 0.055372 * theta ** 2 + 0.12754 * theta + 0.45228
-
-        # -19106210871.2335 * r ** 4 - 48344308.1061*r**3*theta + 284021868.4219*r**3 + 50007.4935*r**2*theta**2 +
-        # 212394.595*r**2*theta - 1195639.6516*r**2 + 18.6453*r*theta**3 + 3.8992*r*theta**2 - 801.2832*r*theta +
-        # 2171.919*r + 0.29244*theta**4 - 1.8753*theta**3 + 1.751*theta**2 + 4.0333*theta + 14.3022
     )
 
 
@@ -153,7 +110,7 @@ def propagation_model(model: str, r: float, a: float, theta: float, load: list, 
 
     if delta_K > 84:
         print('Critical Limit Surpassed')
-        return None
+        return (None, None)
 
     if prints:
         print('loads', load[0], load[1])
@@ -165,17 +122,17 @@ def propagation_model(model: str, r: float, a: float, theta: float, load: list, 
         return r + C_paris * pow(delta_K, n_paris) * 10 ** 3
 
     if model == 'Nasgro':
-        if delta_K >= 0:  # non propagation limit
+        if delta_K >= 0.879:  # non propagation limit
             r_next = r + C_nasgro * 10 ** 3 * (delta_K * (1 - f(R)) / (1 - R)) ** n_nasgro * (
                         1 - (delta_Kth / delta_K)) ** p / (
                              1 - (sif_max / 84.)) ** q
         else:
             # Automatic Increment
             r_next = r * 1
-        return r_next
+        return (r_next, delta_K)
 
     if model == 'Walker':
-        if delta_K >= 0:
+        if delta_K >= 2.835:
             r_next = r + (C_walker * (delta_K / ((1 - R) ** (1 - gamma))) ** n_walker) * 10 ** 3
         else:
             # Automatic Increment
@@ -185,7 +142,7 @@ def propagation_model(model: str, r: float, a: float, theta: float, load: list, 
             print(r_next)
             print('increment is nan')
             exit()
-        return r_next
+        return (r_next, delta_K)
 
     else:
         print('Model not available or mispelled')
@@ -212,12 +169,14 @@ class CrackPropagator:
 
         self.history = []
         self.crack_over_time = []
+        self.deltaK_over_time = []
         self.iterate()
 
         if save_simulation:
             with open('simulation_files/' + file.split('/')[-1].split('.')[0] + '_' + model + '_' + str(init_size) +
                       '_' + str(repetitions) + '.pkl', 'wb') as f:
                 pickle.dump(self.crack_over_time, f)
+                pickle.dump(self.deltaK_over_time, f)
 
     def get_radius(self, theta):
         return self.init_size / (math.sqrt(math.cos(theta) ** 2 + 4 * math.sin(theta) ** 2))
@@ -228,8 +187,11 @@ class CrackPropagator:
 
         a = self.init_size / 2.
         for i, l in enumerate(tqdm(load_matrix)):
-            increments = [propagation_model(self.model, r, a, self.thetas[i], l) for i, r in
+            increments = [propagation_model(self.model, r, a, self.thetas[i], l)[0] for i, r in
                           enumerate(self.crack_size)]
+            delta_K = [propagation_model(self.model, r, a, self.thetas[i], l)[1] for i, r in
+                          enumerate(self.crack_size)]
+
             # self.history.append(increments)
             if None in increments:
                 print('stopping criteria found')
@@ -237,9 +199,11 @@ class CrackPropagator:
 
             if i % 5000 == 0:
                 self.crack_over_time.append(increments[1])
+                self.deltaK_over_time.append(delta_K[1])
+            self.history.append(increments)
             self.crack_size = increments
             a = increments[int(self.nr_dots / 2)]
-        # print(self.history)
+        #print(self.history)
 
     def info(self):
         attrs = vars(self)
@@ -266,7 +230,7 @@ def plot(C: CrackPropagator):
     # First set up the figure, the axis, and the plot element we want to animate
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='polar')
-    ax.set_ylim(0, 5)
+    ax.set_ylim(0, 2.5)
 
     dots = [Dot(C.get_radius(C.thetas[i]), C.thetas[i]) for i in range(C.nr_dots)]
     d, = ax.plot([dot.theta for dot in dots],
@@ -289,7 +253,7 @@ def plot(C: CrackPropagator):
     if st.button(" Click for Animation"):
         for f in range(3):
             init()
-            for i in range(6):
+            for i in range(1, 500, 100):
                 animate(i)
                 time.sleep(0.1)
 
@@ -301,10 +265,11 @@ def visualize_data(df, x_axis, y_axis):
     ).interactive()
     graph.encoding.x.title = 'Time (s)'
     graph.encoding.y.title = 'Load Factor'
+    graph.encoding.y.scale = alt.Scale(domain=[-1, 6])
     alt.data_transformers.disable_max_rows()
 
-    graph.show()
-    # st.write(graph)
+    #graph.show()
+    st.write(graph)
 
 
 def to_matrix(l, n):
@@ -313,9 +278,10 @@ def to_matrix(l, n):
 
 # Press the green button in the gutter to run the script.
 def main():
-    default_init = 1.
+    default_init = 2.
     default_nr_dots = 6
-    default_file = 'flight_data/acrobacias/acrobacias_8.csv'
+    default_file = 'flight_data/acrobacias/sequence.csv'
+    #default_file = 'flight_data/acrobacias/acrobacias_8.csv'
 
     st.set_option('deprecation.showfileUploaderEncoding', False)
     st.header("Crack Propagator.")
@@ -378,39 +344,42 @@ def simulate():
     #print('Final Crack Lenghts ', C.crack_size)
      #C.plot_over_time()
 
-    """
-    #C1 = CrackPropagator(init_size=2, model='Nasgro', file='flight_data/acrobacias/acrobacias_0.csv',
-    #nr_dots=3, repetitions=50000, save_simulation=True)
+     """
+    # Acrobacias
+    #C1 = CrackPropagator(init_size=2, model='Nasgro', file='flight_data/acrobacias/acrobacias_8.csv',
+    #nr_dots=3, repetitions=20000, save_simulation=True)
    # print('Final Crack Lenghts ', C1.crack_size)
 
-    C2 = CrackPropagator(init_size=2, model='Nasgro', file='flight_data/acrobacias/acrobacias_0.csv',
-                         nr_dots=3, repetitions=40000, save_simulation=True)
-    print('Final Crack Lenghts ', C2.crack_size)
+    #C2 = CrackPropagator(init_size=2, model='Walker', file='flight_data/acrobacias/acrobacias_8.csv',
+                     #   nr_dots=3, repetitions=20000, save_simulation=True)
+    #print('Final Crack Lenghts ', C2.crack_size)
     #visualize_data(C2.df, C2.df.columns[0], C2.df.columns[1])
 
-    #C3 = CrackPropagator(init_size=2, model='Walker', file='flight_data/acrobacias/acrobacias_0.csv',
-    #nr_dots=3, repetitions=50000, save_simulation=True)
-    #print('Final Crack Lenghts ', C3.crack_size)
+    # Instrumentos
 
-    #C4 = CrackPropagator(init_size=2, model='Walker', file='flight_data/acrobacias/acrobacias_0.csv',
-                #         nr_dots=3, repetitions=40000, save_simulation=True)
+
+    #C4 = CrackPropagator(init_size=2, model='Nasgro', file='flight_data/instrumentos/instrumentos_0.csv',
+    #                     nr_dots=3, repetitions=40000, save_simulation=True)
     #print('Final Crack Lenghts ', C4.crack_size)
 
+    C3 = CrackPropagator(init_size=2, model='Walker', file='flight_data/instrumentos/instrumentos_0.csv',
+                         nr_dots=3, repetitions=1, save_simulation=False)
+    print('Final Crack Lenghts ', C3.crack_size)
 
 def create_bigfile(flight_type: str = 'acrobacias'):
     if flight_type == 'acrobacias':
         #df = pd.read_csv('flight_data/instrumentos/normal_3.csv', sep=',')
         #df = pd.read_csv('flight_data/instrumentos/normal_2.csv', sep=',')
-        #df2 = pd.read_csv('flight_data/instrumentos/normal_1.csv', sep=',')
-        df = pd.read_csv('flight_data/acrobacias/acrobacias_1.csv', sep=',')
+        #df = pd.read_csv('flight_data/instrumentos/normal_3.csv', sep=',')
+        #df = pd.read_csv('flight_data/acrobacias/acrobacias_1.csv', sep=',')
         #df = pd.read_csv('flight_data/acrobacias/acrobacias_2.csv', sep=',')
-        df1 = pd.read_csv('flight_data/acrobacias/acrobacias_3.csv', sep=',')
-        df2 = pd.read_csv('flight_data/acrobacias/acrobacias_5.csv', sep=',')
-        #df = pd.read_csv('flight_data/acrobacias/acrobacias_8.csv', sep=',')
+        #df = pd.read_csv('flight_data/acrobacias/acrobacias_3.csv', sep=',')
+        #df2 = pd.read_csv('flight_data/acrobacias/acrobacias_5.csv', sep=',')
+        #df1 = pd.read_csv('flight_data/acrobacias/acrobacias_5.csv', sep=',')
 
 
-        df = pd.concat([df, df1], ignore_index=True).reindex(df.index)
-        df = pd.concat([df, df2], ignore_index=True).reindex(df.index)
+        #df = pd.concat([df, df1], ignore_index=True).reindex(df.index)
+        #df = pd.concat([df, df2], ignore_index=True).reindex(df.index)
         #df = pd.concat([df, df3], ignore_index=True).reindex(df.index)
         #df = pd.concat([df, df4], ignore_index=True).reindex(df.index)
         #df = pd.concat([df, df5], ignore_index=True).reindex(df.index)
@@ -419,25 +388,25 @@ def create_bigfile(flight_type: str = 'acrobacias'):
 
         df.to_csv('flight_data/acrobacias/acrobacias_0.csv', index=False)
 
-   # elif flight_type == 'instrumentos':
+    elif flight_type == 'instrumentos':
 
-        ##df = pd.read_csv('flight_data/acrobacias/acrobacias_8.csv', sep=',')
+        df = pd.read_csv('flight_data/acrobacias/acrobacias_3.csv', sep=',')
         #df2 = pd.read_csv('flight_data/instrumentos/normal_2.csv', sep=',')
-        #df1 = pd.read_csv('flight_data/acrobacias/acrobacias_3.csv', sep=',')
+        df1 = pd.read_csv('flight_data/instrumentos/normal_3.csv', sep=',')
         #df2 = pd.read_csv('flight_data/acrobacias/acrobacias_5.csv', sep=',')
         #df3 = pd.read_csv('flight_data/instrumentos/normal_4.csv', sep=',')
         #df4 = pd.read_csv('flight_data/acrobacias/acrobacias_1.csv', sep=',')
         #df5 = pd.read_csv('flight_data/acrobacias/acrobacias_2.csv', sep=',')
 
-       # df = pd.concat([df, df1], ignore_index=True).reindex(df.index)
+        df = pd.concat([df, df1], ignore_index=True).reindex(df.index)
         #df = pd.concat([df, df2], ignore_index=True).reindex(df.index)
         #df = pd.concat([df, df4], ignore_index=True).reindex(df.index)
         #df = pd.concat([df, df5], ignore_index=True).reindex(df.index)
         #df = pd.concat([df, df3], ignore_index=True).reindex(df.index)
         #df = pd.concat([df, df7], ignore_index=True).reindex(df.index)
 
-        #df.to_csv('flight_data/instrumentos/instrumentos_0.csv', index=False)
-        #print('instrumentos file created')
+        df.to_csv('flight_data/instrumentos/instrumentos_0.csv', index=False)
+        print('instrumentos file created')
 
    # elif flight_type == 'other':
         #df = pd.read_csv('flight_data/instrumentos/instrumentos_0.csv', sep=',')
