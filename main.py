@@ -285,6 +285,11 @@ def main():
 
     st.set_option('deprecation.showfileUploaderEncoding', False)
     st.header("Crack Propagator.")
+    
+    from PIL import Image
+    image = Image.open('tb.jpg')
+    st.image(image, caption='Epsilon TB-30 Aircraft', width=400)
+    
     st.write("Please configure inputs on the left.")
 
     # Input Selection
