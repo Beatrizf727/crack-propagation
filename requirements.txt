@@ -6,4 +6,3 @@ scipy==1.5.4
 matplotlib==3.3.4
 streamlit==0.77.0
 pandas==1.1.5
-Pillow==8.4.0
