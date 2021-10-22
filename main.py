@@ -284,14 +284,17 @@ def main():
     #default_file = 'flight_data/acrobacias/acrobacias_8.csv'
 
     st.set_option('deprecation.showfileUploaderEncoding', False)
-    st.header("Crack Propagator.")
-    
-    from PIL import Image
-    image = Image.open('tb.jpg')
-    st.image(image, caption='Epsilon TB-30 Aircraft', width=400)
-    
-    st.write("Please configure inputs on the left.")
+    st.header("Epsilon TB-30 - Crack Propagation Tool")
 
+    from PIL import Image
+    image1 = Image.open('tb.jpg')
+    image2 = Image.open('frame.jpg')
+
+    st.image([image1, image2], width=325)
+    st.write('This tool allows the user to simulate the crack growth at a critical location located on the frame of the '
+             'Epsilon TB-30 aircraft for a given flight data file. Through the configuration panel, the user has the '
+             'freedom to select the initial crack size, the number of nodes on the crack front contour and also a crack '
+             'propagation model.')
     # Input Selection
     init_size = st.sidebar.number_input("Enter initial crack length (mm)", 1., 4.,
                                         default_init)  # *10**(-3)  # Initial Crack Size
@@ -305,6 +308,7 @@ def main():
 
     uploaded_files = st.sidebar.file_uploader("Choose CSV file", accept_multiple_files=False)
 
+    st.subheader('Flight Spectrum')
     if uploaded_files is None:
         uploaded_files = default_file
         st.write('Default File Uploaded Successfuly!')
@@ -314,10 +318,13 @@ def main():
     C = CrackPropagator(init_size=init_size, model=model, file=uploaded_files, nr_dots=nr_dots, repetitions=100)
     visualize_data(C.df, C.df.columns[0], C.df.columns[1])
 
+    st.subheader('Animation')
     plot(C)
 
-    if st.button('Get Crack Final Size'):
+    st.subheader('Final Crack Size')
+    if st.button('Propagate'):
         st.write('Final Crack Lenghts ', C.crack_size)
+
 
 
 def simulate():
